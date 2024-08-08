@@ -10,19 +10,14 @@ public class PlayerManager {
         File directory = new File(dirPath);
 
         // getting Files in directory that end with `.wav`
-        File[] files = directory.listFiles(new FileFilter() {
-            @Override
-            public boolean accept(File pathname) {
-                return pathname.getPath().endsWith(".wav");
-            }
-        });
+        File[] files = directory.listFiles(pathname -> pathname.getPath().endsWith(".wav"));
         if (files != null) {
             for (File file : files) {
                 try {
                     AudioPlayer player = new AudioPlayer(file);
                     players.addLast(player);
                 } catch (Exception e) {
-                    continue;
+                    System.err.println(e.getMessage());
                 }
             }
         }
