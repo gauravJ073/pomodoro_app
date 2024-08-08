@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.IOException;
-import java.util.Scanner;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -55,41 +54,39 @@ public class AudioPlayer {
     }
 
     // Method to resume the audio
-    public void resumeAudio() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+    public void resume() {
         if (!paused) {
             System.out.println("Audio is already " + "being played");
             return;
         }
         clip.close();
-//        resetAudioStream();
         clip.setMicrosecondPosition(currentFrame);
         this.play();
     }
 
     // Method to restart the audio
-    public void restart() throws IOException, LineUnavailableException, UnsupportedAudioFileException {
+    public void restart() {
         currentFrame = 0L;
         clip.setMicrosecondPosition(currentFrame);
         if (paused) {
             this.play();
-            return;
         }
     }
 
     // Method to stop the audio
-    public void stop() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+    public void stop() {
         currentFrame = 0L;
         clip.stop();
         clip.close();
     }
 
     // Method to jump over a specific part
-    public void jump(long c) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        if (c > 0 && c < clip.getMicrosecondLength()) {
+    public void jump(long second) {
+        if (second > 0 && second < clip.getMicrosecondLength()) {
             clip.stop();
             clip.close();
-            currentFrame = c;
-            clip.setMicrosecondPosition(c);
+            currentFrame = second;
+            clip.setMicrosecondPosition(second);
             this.play();
         }
     }
