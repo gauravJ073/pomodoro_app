@@ -16,11 +16,9 @@ public class AudioPlayer {
     Clip clip;
 
     AudioInputStream audioInputStream;
-    String filePath;
 
     // constructor to initialize streams and clip
     public AudioPlayer(String filePath) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        this.filePath = filePath;
         // create AudioInputStream object
         audioInputStream = AudioSystem.getAudioInputStream(new File(filePath).getAbsoluteFile());
 
@@ -29,8 +27,17 @@ public class AudioPlayer {
 
         // open audioInputStream to the clip
         clip.open(audioInputStream);
+    }
 
-        clip.loop(Clip.LOOP_CONTINUOUSLY);
+    public AudioPlayer(File file) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+        // create AudioInputStream object
+        audioInputStream = AudioSystem.getAudioInputStream(file);
+
+        // create clip reference
+        clip = AudioSystem.getClip();
+
+        // open audioInputStream to the clip
+        clip.open(audioInputStream);
     }
 
     // Method to play the audio
