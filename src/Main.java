@@ -1,27 +1,26 @@
 import javax.swing.*;
 import java.awt.*;
-//import ProgressCircleUI;
-
 
 public class Main {
-    public static void main(String[] args) {
-        JSlider slider=new JSlider(JSlider.HORIZONTAL);
-        JProgressBar pb = new JProgressBar();
-        pb.setUI(new ProgressCircleUI());
-        pb.setValue(55);
-        pb.setBorderPainted(false);
+
+    public static void main(String[] args) throws InterruptedException {
+        int seconds=10;
+
+        TimerCircle timer=new TimerCircle(seconds);
 
         JFrame frame= new JFrame("Slider");
         Container contentPane=frame.getContentPane();
 
         JPanel panel= new JPanel();
-        panel.add(slider);
-        panel.add(pb);
+
+        panel.add(timer.getTimerComponent());
         contentPane.add(panel);
 
         frame.pack();
         frame.setVisible(true);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        timer.startTimer();
         System.out.print("Hello and welcome!");
     }
 }
