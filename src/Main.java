@@ -13,7 +13,7 @@ public class Main {
 
         JPanel panel= new JPanel();
 
-        panel.add(timer.getTimerComponent());
+        panel.add(timer);
         contentPane.add(panel);
 
         frame.pack();

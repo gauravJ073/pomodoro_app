@@ -2,15 +2,14 @@ import javax.swing.*;
 
 import static java.lang.Thread.sleep;
 
-public class TimerCircle {
+public class TimerCircle extends JProgressBar{
     private int seconds;
-    private final JProgressBar timer_component;
 
     TimerCircle(int seconds){
+        super(0, seconds);
         this.seconds=seconds;
-        this.timer_component = new JProgressBar(0, this.seconds);
-        this.timer_component.setUI(new ProgressCircleUI());
-        this.timer_component.setBorderPainted(false);
+        this.setUI(new ProgressCircleUI());
+        this.setBorderPainted(false);
     }
 
     void setTime(int seconds){
@@ -19,10 +18,6 @@ public class TimerCircle {
 
     int getTime(){
         return this.seconds;
-    }
-
-    JProgressBar getTimerComponent(){
-        return this.timer_component;
     }
 
     private String getTimeString(int sec){
@@ -42,9 +37,9 @@ public class TimerCircle {
         for(int i =1;i<=this.seconds;i+=1){
             String time=this.getTimeString(i);
             sleep(1000);
-            this.timer_component.setString(time);
-            this.timer_component.setStringPainted(true);
-            this.timer_component.setValue(i);
+            this.setString(time);
+            this.setStringPainted(true);
+            this.setValue(i);
         }
     }
 }
