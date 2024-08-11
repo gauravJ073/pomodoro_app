@@ -1,15 +1,34 @@
+import java.util.Scanner;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+    public static void main(String[] args) throws InterruptedException {
+        AudioPlayer player;
+        try {
+            player = new AudioPlayer("D:\\Dev\\Java\\pomodoro_app\\test_resources\\");
+            for (;;) {
+                System.out.println("1. Play\n2. Pause\n3. Next\n4. Previous\n5. Resume");
+                Scanner scan = new Scanner(System.in);
+                int option = scan.nextInt();
+                switch(option) {
+                    case 1 : player.play();
+                        break;
+                    case 2 : player.pause();
+                        break;
+                    case 3 : player.next();
+                        break;
+                    case 4 : player.previous();
+                        break;
+                    case 5 : player.resume();
+                        break;
+                    default : System.exit(0);
+                }
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
         }
+
     }
 }

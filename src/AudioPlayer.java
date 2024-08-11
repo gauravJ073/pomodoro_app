@@ -10,52 +10,49 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 public class AudioPlayer {
     // current status of the player
     boolean paused = false;
+    // current playing track index
+    int currentTrack = 0;
+    // current position on `currentTrack`
+    Long currentMicrosecondPosition = 0L;
 
-    // to store current position
-    Long currentFrame;
+    // list of audio files to play from
+    File[] files;
+
     Clip clip;
-
     AudioInputStream audioInputStream;
 
-    // constructor to initialize streams and clip
-    public AudioPlayer(String filePath) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        // create AudioInputStream object
-        audioInputStream = AudioSystem.getAudioInputStream(new File(filePath).getAbsoluteFile());
+    public AudioPlayer(String dirPath) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+        // Getting `.wav` files from directory
+        File directory = new File(dirPath);
+        files = directory.listFiles(pathname -> pathname.getPath().endsWith(".wav"));
 
-        // create clip reference
-        clip = AudioSystem.getClip();
-
-        // open audioInputStream to the clip
-        clip.open(audioInputStream);
+        if (files != null) {
+            audioInputStream = AudioSystem.getAudioInputStream(files[currentTrack]);
+            clip = AudioSystem.getClip();
+            clip.open(audioInputStream); // open audioInputStream to the clip
+        }
     }
 
-    public AudioPlayer(File file) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        // create AudioInputStream object
+    private void getPlayer(File file) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+        clip.close();
         audioInputStream = AudioSystem.getAudioInputStream(file);
-
-        // create clip reference
-        clip = AudioSystem.getClip();
-
-        // open audioInputStream to the clip
-        clip.open(audioInputStream);
+        clip.open(audioInputStream); // open audioInputStream to the clip
     }
 
     // Method to play the audio
     public void play() {
-        //start the clip
-        System.out.println(clip.getFramePosition());
+        currentMicrosecondPosition = 0L;
         clip.start();
-
         paused = false;
     }
 
     // Method to pause the audio
     public void pause() {
         if (paused) {
-            System.out.println("audio is already paused");
+            System.err.println("audio is already paused");
             return;
         }
-        currentFrame = clip.getMicrosecondPosition();
+        currentMicrosecondPosition = clip.getMicrosecondPosition();
         clip.stop();
         paused = true;
     }
@@ -63,18 +60,17 @@ public class AudioPlayer {
     // Method to resume the audio
     public void resume() {
         if (!paused) {
-            System.out.println("Audio is already " + "being played");
+            System.err.println("audio is already being played");
             return;
         }
-        clip.close();
-        clip.setMicrosecondPosition(currentFrame);
+        clip.setMicrosecondPosition(currentMicrosecondPosition);
         this.play();
     }
 
     // Method to restart the audio
     public void restart() {
-        currentFrame = 0L;
-        clip.setMicrosecondPosition(currentFrame);
+        currentMicrosecondPosition = 0L;
+        clip.setMicrosecondPosition(currentMicrosecondPosition);
         if (paused) {
             this.play();
         }
@@ -82,20 +78,41 @@ public class AudioPlayer {
 
     // Method to stop the audio
     public void stop() {
-        currentFrame = 0L;
+        currentMicrosecondPosition = 0L;
         clip.stop();
         clip.close();
     }
 
     // Method to jump over a specific part
     public void jump(long second) {
-        if (second > 0 && second < clip.getMicrosecondLength()) {
+        if (second >= 0 && second < clip.getMicrosecondLength()) {
             clip.stop();
             clip.close();
-            currentFrame = second;
+            currentMicrosecondPosition = second * 1000000;
             clip.setMicrosecondPosition(second);
             this.play();
         }
     }
 
+    // Method to move to next track
+    public void next() {
+        currentTrack = (currentTrack+1) % files.length;
+        try {
+            getPlayer(files[currentTrack]);
+            this.play();
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public void previous() {
+        currentTrack = (currentTrack - 1) % files.length;
+        if (currentTrack < 0) currentTrack = 0;
+        try {
+            getPlayer(files[currentTrack]);
+            this.play();
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
 }
