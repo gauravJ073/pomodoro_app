@@ -1,34 +1,26 @@
-import java.util.Scanner;
+import javax.swing.*;
+import java.awt.*;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
-        AudioPlayer player;
-        try {
-            player = new AudioPlayer("D:\\Dev\\Java\\pomodoro_app\\test_resources\\");
-            for (;;) {
-                System.out.println("1. Play\n2. Pause\n3. Next\n4. Previous\n5. Resume");
-                Scanner scan = new Scanner(System.in);
-                int option = scan.nextInt();
-                switch(option) {
-                    case 1 : player.play();
-                        break;
-                    case 2 : player.pause();
-                        break;
-                    case 3 : player.next();
-                        break;
-                    case 4 : player.previous();
-                        break;
-                    case 5 : player.resume();
-                        break;
-                    default : System.exit(0);
-                }
-            }
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-        }
+        int seconds=10;
 
+        TimerCircle timer=new TimerCircle(seconds);
+
+        JFrame frame= new JFrame("Slider");
+        Container contentPane=frame.getContentPane();
+
+        JPanel panel= new JPanel();
+
+        panel.add(timer.getTimerComponent());
+        contentPane.add(panel);
+
+        frame.pack();
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        timer.startTimer();
+        System.out.print("Hello and welcome!");
     }
 }
