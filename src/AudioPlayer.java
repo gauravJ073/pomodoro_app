@@ -44,6 +44,7 @@ public class AudioPlayer {
     public void playTrack() {
         if (currentState == playerState.PAUSED) {
             clip.start();
+            currentState = playerState.PlAYING;
             return;
         }
 
