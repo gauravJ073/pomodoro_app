@@ -8,8 +8,9 @@ public class Main {
         AudioPlayer player;
         try {
             player = new AudioPlayer("D:\\Dev\\Java\\pomodoro_app\\test_resources\\");
+            System.out.println("1. Play\n2. Pause\n3. Next\n4. Previous");
             for (;;) {
-                System.out.println("1. Play\n2. Pause\n3. Next\n4. Previous");
+                System.out.println("Current Track : " + player.getCurrentTrack());
                 Scanner scan = new Scanner(System.in);
                 int option = scan.nextInt();
                 switch(option) {

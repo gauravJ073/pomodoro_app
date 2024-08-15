@@ -42,13 +42,17 @@ public class AudioPlayer {
 
     // Method to play the audio
     public void playTrack() {
-        if (currentState == playerState.PAUSED) {
-            clip.start();
+        if (currentState == playerState.PlAYING) {
+            return;
+        } else if (currentState == playerState.PAUSED) {
             currentState = playerState.PlAYING;
+            clip.start();
             return;
         }
 
-        currentTrack = currentTrack % files.size();
+        if (currentTrack >= files.size()) {
+            currentTrack = 0;
+        }
         if (currentTrack < 0) {
             currentTrack = files.size() - 1;
         }
@@ -79,13 +83,13 @@ public class AudioPlayer {
     }
 
     public void playNextTrack() {
-        currentTrack++;
+        currentTrack = currentTrack + 1;
         currentState = playerState.SKIPPING;
         playTrack();
     }
 
     public void playPreviousTrack() {
-        currentTrack--;
+        currentTrack = currentTrack - 1;
         currentState = playerState.SKIPPING;
         playTrack();
     }
@@ -95,5 +99,9 @@ public class AudioPlayer {
             currentState = playerState.PAUSED;
             clip.stop();
         }
+    }
+
+    public int getCurrentTrack() {
+        return currentTrack;
     }
 }
