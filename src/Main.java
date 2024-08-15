@@ -9,21 +9,20 @@ public class Main {
         try {
             player = new AudioPlayer("D:\\Dev\\Java\\pomodoro_app\\test_resources\\");
             for (;;) {
-                System.out.println("1. Play\n2. Pause\n3. Next\n4. Previous\n5. Resume");
+                System.out.println("1. Play\n2. Pause\n3. Next\n4. Previous");
                 Scanner scan = new Scanner(System.in);
                 int option = scan.nextInt();
                 switch(option) {
-                    case 1 : player.play();
+                    case 1 : player.playTrack();
                         break;
-                    case 2 : player.pause();
+                    case 2 : player.pauseTrack();
                         break;
-                    case 3 : player.next();
+                    case 3 : player.playNextTrack();
                         break;
-                    case 4 : player.previous();
+                    case 4 : player.playPreviousTrack();
                         break;
-                    case 5 : player.resume();
-                        break;
-                    default : System.exit(0);
+                    default:
+                        System.exit(0);
                 }
             }
         } catch (Exception e) {

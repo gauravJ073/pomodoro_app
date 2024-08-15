@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4cbdfc9e-9cd6-4e65-a8f4-2c9fc65838f0" name="Changes" comment="MODIFIED .gitignore">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AudioPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AudioPlayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PlayerManager.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +39,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/gauravJ073/pomodoro_app.git&quot;,
-    &quot;accountId&quot;: &quot;03905435-0602-4379-b8b3-5d34456952d5&quot;
+    &quot;accountId&quot;: &quot;5d5f1786-53a4-4a8d-9e6b-dcea2bca9ec7&quot;
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
@@ -60,8 +58,9 @@
   "keyToString": {
     "Application.Main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "audio__player",
+    "git-widget-placeholder": "#2 on audio__player",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Dev/Java/demo",
     "onboarding.tips.debug.path": "E:/Projects/pomodoro_app/src/Main.java"
   }
 }]]></component>

@@ -1,118 +1,98 @@
 import java.io.File;
-import java.io.IOException;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import javax.sound.sampled.*;
 
 public class AudioPlayer {
-    // current status of the player
-    boolean paused = false;
     // current playing track index
-    int currentTrack = 0;
-    // current position on `currentTrack`
-    Long currentMicrosecondPosition = 0L;
-
-    // list of audio files to play from
-    File[] files;
-
-    Clip clip;
-    AudioInputStream audioInputStream;
-
-    public AudioPlayer(String dirPath) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        // Getting `.wav` files from directory
-        File directory = new File(dirPath);
-        files = directory.listFiles(pathname -> pathname.getPath().endsWith(".wav"));
-
-        if (files != null) {
-            audioInputStream = AudioSystem.getAudioInputStream(files[currentTrack]);
-            clip = AudioSystem.getClip();
-            clip.open(audioInputStream); // open audioInputStream to the clip
-        }
+    private int currentTrack = 0;
+    private final List<File> files = new ArrayList<>();
+    private Clip clip;
+    private playerState currentState = playerState.UNINITIALIZED;
+    private enum playerState {
+        UNINITIALIZED,
+        PlAYING,
+        PAUSED,
+        SKIPPING
     }
 
-    private void getPlayer(File file) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        clip.close();
-        audioInputStream = AudioSystem.getAudioInputStream(file);
-        clip.open(audioInputStream); // open audioInputStream to the clip
+    public AudioPlayer(String dirPath) {
+        // Getting `.wav` files from directory
+        File directory = new File(dirPath);
+        if (!directory.isDirectory()) {
+            System.err.println("No such directory found.");
+        }
+
+        for (File file : Objects.requireNonNull(directory.listFiles())) {
+            if (file.getName().endsWith(".wav")) {
+                files.add(file);
+            }
+        }
+
+        if (files.isEmpty()) {
+            System.err.println("No audio files found in the directory.");
+        } else {
+            for (File file : files) {
+                System.out.print(file.getName() + "\t");
+            }
+            System.out.println();
+        }
     }
 
     // Method to play the audio
-    public void play() {
-        currentMicrosecondPosition = 0L;
-        clip.start();
-        paused = false;
-    }
-
-    // Method to pause the audio
-    public void pause() {
-        if (paused) {
-            System.err.println("audio is already paused");
+    public void playTrack() {
+        if (currentState == playerState.PAUSED) {
+            clip.start();
             return;
         }
-        currentMicrosecondPosition = clip.getMicrosecondPosition();
-        clip.stop();
-        paused = true;
-    }
 
-    // Method to resume the audio
-    public void resume() {
-        if (!paused) {
-            System.err.println("audio is already being played");
-            return;
+        currentTrack = currentTrack % files.size();
+        if (currentTrack < 0) {
+            currentTrack = files.size() - 1;
         }
-        clip.setMicrosecondPosition(currentMicrosecondPosition);
-        this.play();
-    }
 
-    // Method to restart the audio
-    public void restart() {
-        currentMicrosecondPosition = 0L;
-        clip.setMicrosecondPosition(currentMicrosecondPosition);
-        if (paused) {
-            this.play();
+        if (clip != null) {
+            if (clip.isRunning()) {
+                clip.stop();
+            }
+            if (clip.isOpen()) {
+                clip.close();
+            }
+        }
+
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(files.get(currentTrack));
+            clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+            clip.addLineListener(event -> {
+                if (currentState == playerState.PlAYING && event.getType() == LineEvent.Type.STOP) {
+                    playNextTrack();
+                }
+            });
+            currentState = playerState.PlAYING;
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
         }
     }
 
-    // Method to stop the audio
-    public void stop() {
-        currentMicrosecondPosition = 0L;
-        clip.stop();
-        clip.close();
+    public void playNextTrack() {
+        currentTrack++;
+        currentState = playerState.SKIPPING;
+        playTrack();
     }
 
-    // Method to jump over a specific part
-    public void jump(long second) {
-        if (second >= 0 && second < clip.getMicrosecondLength()) {
+    public void playPreviousTrack() {
+        currentTrack--;
+        currentState = playerState.SKIPPING;
+        playTrack();
+    }
+
+    public void pauseTrack() {
+        if (clip != null && clip.isRunning()) {
+            currentState = playerState.PAUSED;
             clip.stop();
-            clip.close();
-            currentMicrosecondPosition = second * 1000000;
-            clip.setMicrosecondPosition(second);
-            this.play();
-        }
-    }
-
-    // Method to move to next track
-    public void next() {
-        currentTrack = (currentTrack+1) % files.length;
-        try {
-            getPlayer(files[currentTrack]);
-            this.play();
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-        }
-    }
-
-    public void previous() {
-        currentTrack = (currentTrack - 1) % files.length;
-        if (currentTrack < 0) currentTrack = 0;
-        try {
-            getPlayer(files[currentTrack]);
-            this.play();
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
         }
     }
 }
