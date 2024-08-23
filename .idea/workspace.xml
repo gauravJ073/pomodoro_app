@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4cbdfc9e-9cd6-4e65-a8f4-2c9fc65838f0" name="Changes" comment="implemented and tested the TimerCircle class">
+    <list default="true" id="4cbdfc9e-9cd6-4e65-a8f4-2c9fc65838f0" name="Changes" comment="TimerCircle class now extends the JProgressBar class">
+      <change afterPath="$PROJECT_DIR$/src/PomodoroTimer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TimerCircle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TimerCircle.java" afterDir="false" />
@@ -74,15 +75,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "timer__knob",
-    "kotlin-language-version-configured": "true",
-    "onboarding.tips.debug.path": "E:/Projects/pomodoro_app/src/Main.java"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;timer__knob&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;E:/Projects/pomodoro_app/src/Main.java&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -116,7 +117,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723200930856</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="TimerCircle class now extends the JProgressBar class">
+      <option name="closed" value="true" />
+      <created>1723357109097</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1723357109097</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -135,6 +144,7 @@
     <MESSAGE value="created circular progress bar&#10;modified main class" />
     <MESSAGE value="created and implemented TimerCircle class" />
     <MESSAGE value="implemented and tested the TimerCircle class" />
-    <option name="LAST_COMMIT_MESSAGE" value="implemented and tested the TimerCircle class" />
+    <MESSAGE value="TimerCircle class now extends the JProgressBar class" />
+    <option name="LAST_COMMIT_MESSAGE" value="TimerCircle class now extends the JProgressBar class" />
   </component>
 </project>

@@ -1,0 +1,138 @@
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import static java.lang.Thread.sleep;
+
+public class PomodoroTimer extends TimerCircle{
+    private int focusTime;
+    private int breakTime;
+    public enum PomodoroStates {
+        FOCUS,
+        BREAK
+    } // can be either focus or break
+    private PomodoroStates state=PomodoroStates.FOCUS;
+    PomodoroTimer(int focusTime, int breakTime){
+        super(focusTime);
+        this.focusTime=focusTime;
+        this.breakTime=breakTime;
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(e.getClickCount()==2){
+                    skipTime();
+
+                }else{
+                    toggleRunningState();
+                    updateTextOnHover();
+                }
+            }
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                setCursor(new Cursor(Cursor.HAND_CURSOR)); // Change cursor to pointer
+                updateTextOnHover();
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                updateTextOnExit();
+                setCursor(new Cursor(Cursor.DEFAULT_CURSOR)); // Reset cursor to default
+            }
+        });
+    }
+
+
+    private void skipTime() {
+        this.isRunning=false;
+        this.setCurrTime(this.getTime());
+//        setValue(this.getTime());
+        this.setString("Time's Up");
+        switchStates();
+    }
+    private void updateTextOnHover() {
+        if (isRunning) {
+            this.setString("Pause");
+        } else {
+            if(!started){
+                this.setString("Start");
+            }
+            else{
+                this.setString("Continue");
+            }
+        }
+    }
+    private void updateTextOnExit() {
+        if(started){
+            this.setString(getTimeString(getCurrTime()));
+        }
+        else{
+            if(state==PomodoroStates.FOCUS){
+                this.setString("Focus Time");
+            }
+            else{
+                this.setString("Break Time");
+            }
+        }
+    }
+    private void toggleRunningState() {
+        isRunning = !isRunning;
+        started=true;
+    }
+
+    @Override
+    void startTimer() throws InterruptedException {
+        this.setString(this.getTimeString(getCurrTime()));
+        this.setStringPainted(true);
+        for(;getCurrTime()<=this.getTime();){
+            if(isRunning){
+                String time=this.getTimeString(getCurrTime());
+                if(!this.getString().equals("Pause")){
+                    this.setString(time);
+                }
+                this.setValue(getCurrTime());
+                this.setCurrTime(getCurrTime()+1);
+                sleep(1000);
+            }
+            else{
+                sleep(100);
+            }
+
+            if(this.getCurrTime()>=this.getTime()){
+                switchStates();
+            }
+
+        }
+    }
+
+    public void switchStates(){
+        if(state==PomodoroStates.FOCUS){
+            state=PomodoroStates.BREAK;
+            this.setTime(breakTime);
+            this.setMaximum(breakTime);
+            this.setCurrTime(0);
+            this.setValue(0);
+            this.setString("Break Time");
+            this.setForeground(new Color(255, 102, 102));//light green
+        }
+        else{
+            state=PomodoroStates.FOCUS;
+            this.setTime(focusTime);
+            this.setMaximum(focusTime);
+            this.setCurrTime(0);
+            this.setValue(0);
+            this.setString("Focus Time");
+            this.setForeground(new Color(102, 255, 102));//light green
+        }
+        isRunning=false;
+        started=false;
+    }
+
+    public String getState(){
+        if(state==PomodoroStates.FOCUS){
+            return "focus";
+        }
+        else{
+            return "break";
+        }
+    }
+}

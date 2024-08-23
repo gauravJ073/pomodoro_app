@@ -1,15 +1,25 @@
 import javax.swing.*;
 
+
+import java.awt.*;
+
 import static java.lang.Thread.sleep;
 
 public class TimerCircle extends JProgressBar{
     private int seconds;
+    private int currTime;
+    protected boolean isRunning;
+    protected boolean started;
 
     TimerCircle(int seconds){
         super(0, seconds);
         this.seconds=seconds;
+        this.isRunning=false;
+        this.started=false;
+        this.currTime=0;
         this.setUI(new ProgressCircleUI());
-        this.setBorderPainted(false);
+        this.setBorderPainted(true);
+        this.setForeground(new Color(102, 255, 102));//light green
     }
 
     void setTime(int seconds){
@@ -20,7 +30,15 @@ public class TimerCircle extends JProgressBar{
         return this.seconds;
     }
 
-    private String getTimeString(int sec){
+    int getCurrTime(){
+        return this.currTime;
+    }
+
+    void setCurrTime(int time){
+        this.currTime=time;
+    }
+
+    String getTimeString(int sec){
         int min=sec/60;
         int secs=sec%60;
         String time;
@@ -34,12 +52,22 @@ public class TimerCircle extends JProgressBar{
     }
 
     void startTimer() throws InterruptedException {
-        for(int i =1;i<=this.seconds;i+=1){
-            String time=this.getTimeString(i);
-            sleep(1000);
-            this.setString(time);
-            this.setStringPainted(true);
-            this.setValue(i);
+        this.setString(this.getTimeString(currTime));
+        this.setStringPainted(true);
+        for(;currTime<=this.seconds;){
+            if(isRunning){
+                String time=this.getTimeString(currTime);
+                if(!this.getString().equals("Pause")){
+                    this.setString(time);
+                }
+                this.setValue(currTime);
+                currTime+=1;
+                sleep(1000);
+            }
+            else{
+                sleep(100);
+            }
+
         }
     }
 }
