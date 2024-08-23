@@ -4,9 +4,9 @@ import java.awt.*;
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
-        int seconds=70;
+        int focusSeconds=70, breakSeconds=10;
 
-        TimerCircle timer=new PomodoroTimer(seconds, 10);
+        TimerCircle timer=new PomodoroTimer(focusSeconds, breakSeconds);
 
         JFrame frame= new JFrame("Slider");
         Container contentPane=frame.getContentPane();
