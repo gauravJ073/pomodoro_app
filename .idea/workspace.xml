@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4cbdfc9e-9cd6-4e65-a8f4-2c9fc65838f0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/TimerCircle.java" afterDir="false" />
+    <list default="true" id="4cbdfc9e-9cd6-4e65-a8f4-2c9fc65838f0" name="Changes" comment="TimerCircle class now extends the JProgressBar class">
+      <change afterPath="$PROJECT_DIR$/src/PomodoroTimer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProgressCircleUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProgressCircleUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TimerCircle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TimerCircle.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,8 +37,12 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
+  &quot;history&quot;: [
+    {
+      &quot;assignee&quot;: &quot;gauravJ073&quot;
+    }
+  ],
   &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
     &quot;assignee&quot;: &quot;gauravJ073&quot;
   }
 }</component>
@@ -46,7 +50,18 @@
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/gauravJ073/pomodoro_app.git&quot;,
     &quot;accountId&quot;: &quot;03905435-0602-4379-b8b3-5d34456952d5&quot;
-  }
+  },
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
+    },
+    &quot;owner&quot;: &quot;gauravJ073&quot;,
+    &quot;repository&quot;: &quot;pomodoro_app&quot;
+  },
+  &quot;editorReviewEnabled&quot;: false
 }</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/TimerCircle.java" root0="FORCE_HIGHLIGHTING" />
@@ -86,7 +101,31 @@
       <option name="project" value="LOCAL" />
       <updated>1723102405374</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="created and implemented TimerCircle class">
+      <option name="closed" value="true" />
+      <created>1723200881430</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1723200881430</updated>
+    </task>
+    <task id="LOCAL-00003" summary="implemented and tested the TimerCircle class">
+      <option name="closed" value="true" />
+      <created>1723200930856</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1723200930856</updated>
+    </task>
+    <task id="LOCAL-00004" summary="TimerCircle class now extends the JProgressBar class">
+      <option name="closed" value="true" />
+      <created>1723357109097</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1723357109097</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -103,6 +142,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first commit" />
     <MESSAGE value="created circular progress bar&#10;modified main class" />
-    <option name="LAST_COMMIT_MESSAGE" value="created circular progress bar&#10;modified main class" />
+    <MESSAGE value="created and implemented TimerCircle class" />
+    <MESSAGE value="implemented and tested the TimerCircle class" />
+    <MESSAGE value="TimerCircle class now extends the JProgressBar class" />
+    <option name="LAST_COMMIT_MESSAGE" value="TimerCircle class now extends the JProgressBar class" />
   </component>
 </project>
