@@ -3,11 +3,13 @@ import javax.swing.event.MouseInputAdapter;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 
 public class PlayerComponent extends JPanel {
+    File directory = new File("D:\\Dev\\Java\\pomodoro_app\\test_resources\\");
+    AudioPlayer player;
     public PlayerComponent() {
-        String directory = "D:\\Dev\\Java\\pomodoro_app\\test_resources\\";
-        AudioPlayer player = new AudioPlayer(directory);
+        player = new AudioPlayer(directory);
         setLayout(new GridLayout(2, 1));
         JPanel playerControls = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
@@ -45,6 +47,22 @@ public class PlayerComponent extends JPanel {
 
         // File Chooser
         JButton chooseDirButton = new JButton("📁");
+        chooseDirButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JFileChooser chooser = new JFileChooser(directory);
+                chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                chooser.setAcceptAllFileFilterUsed(false);
+                int option = chooser.showOpenDialog(null);
+                if (option == JFileChooser.APPROVE_OPTION) {
+                    if (chooser.getSelectedFile().isDirectory()) {
+                        directory = chooser.getSelectedFile();
+                        player = player.resetDirectory(directory);
+                        playButton.setText("▶️");
+                    }
+                }
+            }
+        });
 
         // Timeline
         JSlider audioTimeline = new JSlider();
