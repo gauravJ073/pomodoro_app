@@ -23,16 +23,11 @@ public class AudioPlayer {
         PAUSED,
         SKIPPING
     }
-
     public AudioPlayer(String dirPath) {
-        // Getting `.wav` files from directory
-        File directory = new File(dirPath);
+        this(new File(dirPath));
+    }
 
-        // Checking if the specified path is directory
-        if (!directory.isDirectory()) {
-            System.err.println("No such directory found.");
-        }
-
+    public AudioPlayer(File directory) {
         // Adding .wav file to the list
         for (File file : Objects.requireNonNull(directory.listFiles())) {
             if (file.getName().endsWith(".wav")) {
