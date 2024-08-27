@@ -41,6 +41,20 @@ public class AudioPlayer {
         }
     }
 
+    // Method to change the directory being used
+    public AudioPlayer resetDirectory(File directory) {
+        pauseTrack();
+        if (clip != null) {
+            if (clip.isRunning()) {
+                clip.stop();
+            }
+            if (clip.isOpen()) {
+                clip.close();
+            }
+        }
+        return new AudioPlayer(directory);
+    }
+
     // Method to play the audio
     public void playTrack() {
         if (currentState == playerState.PlAYING) { // If the player is already PLAYING do nothing
