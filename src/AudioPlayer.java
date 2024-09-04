@@ -17,12 +17,25 @@ public class AudioPlayer {
     private playerState currentState = playerState.UNINITIALIZED;
 
     // All possible player states
-    public static enum playerState {
+    public enum playerState {
         UNINITIALIZED,
         PlAYING,
         PAUSED,
         SKIPPING
     }
+
+    public interface TrackChangeListener {
+        void onTrackChange(int trackMilliSecondLength);
+        void onTrackPause();
+        void onTrackPlay();
+    }
+
+    private TrackChangeListener trackChangeListener;
+
+    public void setTrackChangeListener (TrackChangeListener listener) {
+        this.trackChangeListener = listener;
+    }
+
     public AudioPlayer(String dirPath) {
         this(new File(dirPath));
     }
@@ -62,6 +75,9 @@ public class AudioPlayer {
         } else if (currentState == playerState.PAUSED) { // If the player is PAUSED resume the track
             currentState = playerState.PlAYING;
             clip.start();
+            if (trackChangeListener != null) {
+                trackChangeListener.onTrackPlay();
+            }
             return;
         }
 
@@ -95,6 +111,10 @@ public class AudioPlayer {
                 }
             });
             currentState = playerState.PlAYING;
+            if (trackChangeListener != null) {
+                trackChangeListener.onTrackChange((int)clip.getMicrosecondLength()/1000);
+            }
+
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
@@ -116,6 +136,9 @@ public class AudioPlayer {
         if (clip != null && clip.isRunning()) {
             currentState = playerState.PAUSED;
             clip.stop();
+            if (trackChangeListener != null) {
+                trackChangeListener.onTrackPause();
+            }
         }
     }
 
@@ -125,5 +148,22 @@ public class AudioPlayer {
 
     public playerState getState() {
         return this.currentState;
+    }
+
+    // set the current Second position of the track
+    public void setMilliSecondLength(int milliSecond) {
+        clip.setMicrosecondPosition((long)milliSecond*1000);
+    }
+
+    // get the current Second position of the track
+    public int getMilliSecondPosition() {
+        if (clip != null)
+            return (int)(clip.getMicrosecondPosition()/1000);
+        return 0;
+    }
+
+    // get the Second length of the current track
+    public int getMilliSecondLength() {
+        return (int)(clip.getMicrosecondLength()/1000);
     }
 }
