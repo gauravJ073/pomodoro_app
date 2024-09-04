@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4cbdfc9e-9cd6-4e65-a8f4-2c9fc65838f0" name="Changes" comment="minor changes in main class">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PomodoroTimer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PomodoroTimer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProgressCircleUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProgressCircleUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TimerCircle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TimerCircle.java" afterDir="false" />
-    </list>
+    <list default="true" id="4cbdfc9e-9cd6-4e65-a8f4-2c9fc65838f0" name="Changes" comment="minor changes in main class" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
