@@ -1,15 +1,27 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+import javax.swing.*;
+import java.awt.*;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+public class Main {
+
+    public static void main(String[] args) throws InterruptedException {
+        int focusSeconds=70, breakSeconds=10;
+
+        TimerCircle timer=new PomodoroTimer(focusSeconds, breakSeconds);
+
+        JFrame frame= new JFrame("Slider");
+        Container contentPane=frame.getContentPane();
+
+        JPanel panel= new JPanel();
+
+        panel.add(timer);
+
+        contentPane.add(panel);
+
+        frame.pack();
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        timer.startTimer();
+        System.out.print("Hello and welcome!");
     }
 }
