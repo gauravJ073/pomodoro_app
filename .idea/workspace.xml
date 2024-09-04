@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4cbdfc9e-9cd6-4e65-a8f4-2c9fc65838f0" name="Changes" comment="TimerCircle class now extends the JProgressBar class">
-      <change afterPath="$PROJECT_DIR$/src/PomodoroTimer.java" afterDir="false" />
+    <list default="true" id="4cbdfc9e-9cd6-4e65-a8f4-2c9fc65838f0" name="Changes" comment="minor changes in main class">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PomodoroTimer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PomodoroTimer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ProgressCircleUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProgressCircleUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TimerCircle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TimerCircle.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -79,7 +81,7 @@
   &quot;keyToString&quot;: {
     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;timer__knob&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;onboarding.tips.debug.path&quot;: &quot;E:/Projects/pomodoro_app/src/Main.java&quot;
   }

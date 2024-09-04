@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         int focusSeconds=70, breakSeconds=10;
 
-        TimerCircle timer=new PomodoroTimer(focusSeconds, breakSeconds);
+        PomodoroTimer timer=new PomodoroTimer(focusSeconds, breakSeconds);
 
         JFrame frame= new JFrame("Slider");
         Container contentPane=frame.getContentPane();

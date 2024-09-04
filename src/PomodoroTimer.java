@@ -12,6 +12,8 @@ public class PomodoroTimer extends TimerCircle{
         BREAK
     } // can be either focus or break
     private PomodoroStates state=PomodoroStates.FOCUS;
+    private String alarmLoc="";
+
     PomodoroTimer(int focusTime, int breakTime){
         super(focusTime);
         this.focusTime=focusTime;
@@ -45,19 +47,19 @@ public class PomodoroTimer extends TimerCircle{
     private void skipTime() {
         this.isRunning=false;
         this.setCurrTime(this.getTime());
-//        setValue(this.getTime());
-        this.setString("Time's Up");
+        this.setString("TIME'S UP");
+        //playAlarm();
         switchStates();
     }
     private void updateTextOnHover() {
         if (isRunning) {
-            this.setString("Pause");
+            this.setString("PAUSE");
         } else {
             if(!started){
-                this.setString("Start");
+                this.setString("START");
             }
             else{
-                this.setString("Continue");
+                this.setString("CONTINUE");
             }
         }
     }
@@ -67,10 +69,10 @@ public class PomodoroTimer extends TimerCircle{
         }
         else{
             if(state==PomodoroStates.FOCUS){
-                this.setString("Focus Time");
+                this.setString("FOCUS TIME");
             }
             else{
-                this.setString("Break Time");
+                this.setString("BREAK TIME");
             }
         }
     }
@@ -79,14 +81,18 @@ public class PomodoroTimer extends TimerCircle{
         started=true;
     }
 
-    @Override
     void startTimer() throws InterruptedException {
-        this.setString(this.getTimeString(getCurrTime()));
+        if(!started){
+            this.setString("START");
+        }
+        else{
+            this.setString(this.getTimeString(getCurrTime()));
+        }
         this.setStringPainted(true);
         for(;getCurrTime()<=this.getTime();){
             if(isRunning){
                 String time=this.getTimeString(getCurrTime());
-                if(!this.getString().equals("Pause")){
+                if(!this.getString().equals("PAUSE")){
                     this.setString(time);
                 }
                 this.setValue(getCurrTime());
@@ -98,9 +104,9 @@ public class PomodoroTimer extends TimerCircle{
             }
 
             if(this.getCurrTime()>=this.getTime()){
+                //playAlarm();
                 switchStates();
             }
-
         }
     }
 
@@ -111,7 +117,7 @@ public class PomodoroTimer extends TimerCircle{
             this.setMaximum(breakTime);
             this.setCurrTime(0);
             this.setValue(0);
-            this.setString("Break Time");
+            this.setString("BREAK TIME");
             this.setForeground(new Color(255, 102, 102));//light green
         }
         else{
@@ -120,7 +126,7 @@ public class PomodoroTimer extends TimerCircle{
             this.setMaximum(focusTime);
             this.setCurrTime(0);
             this.setValue(0);
-            this.setString("Focus Time");
+            this.setString("FOCUS TIME");
             this.setForeground(new Color(102, 255, 102));//light green
         }
         isRunning=false;
@@ -129,10 +135,10 @@ public class PomodoroTimer extends TimerCircle{
 
     public String getState(){
         if(state==PomodoroStates.FOCUS){
-            return "focus";
+            return "FOCUS";
         }
         else{
-            return "break";
+            return "BREAK";
         }
     }
 }

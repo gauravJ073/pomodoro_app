@@ -57,6 +57,7 @@ class ProgressCircleUI extends BasicProgressBarUI {
                 RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setPaint(progressBar.getForeground()); //Sets the color for the progress indicator.
 
+
         /*
         degree: Represents the angle corresponding to the completion percentage.
         sz: Determines the size of the square that will contain the circle.
