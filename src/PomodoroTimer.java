@@ -12,12 +12,15 @@ public class PomodoroTimer extends TimerCircle{
         BREAK
     } // can be either focus or break
     private PomodoroStates state=PomodoroStates.FOCUS;
-    private String alarmLoc="";
+    private AlarmPlayer alarmPlayer;
+    private boolean alarmPlaying=false;
 
-    PomodoroTimer(int focusTime, int breakTime){
+    PomodoroTimer(int focusTime, int breakTime, String alarmFilePath){
         super(focusTime);
         this.focusTime=focusTime;
         this.breakTime=breakTime;
+        this.alarmPlayer=new AlarmPlayer(alarmFilePath);
+
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -25,6 +28,9 @@ public class PomodoroTimer extends TimerCircle{
                     skipTime();
 
                 }else{
+                    if(alarmPlaying){
+                        stopAlarm();
+                    }
                     toggleRunningState();
                     updateTextOnHover();
                 }
@@ -48,7 +54,6 @@ public class PomodoroTimer extends TimerCircle{
         this.isRunning=false;
         this.setCurrTime(this.getTime());
         this.setString("TIME'S UP");
-        //playAlarm();
         switchStates();
     }
     private void updateTextOnHover() {
@@ -79,6 +84,7 @@ public class PomodoroTimer extends TimerCircle{
     private void toggleRunningState() {
         isRunning = !isRunning;
         started=true;
+
     }
 
     void startTimer() throws InterruptedException {
@@ -104,7 +110,6 @@ public class PomodoroTimer extends TimerCircle{
             }
 
             if(this.getCurrTime()>=this.getTime()){
-                //playAlarm();
                 switchStates();
             }
         }
@@ -131,6 +136,7 @@ public class PomodoroTimer extends TimerCircle{
         }
         isRunning=false;
         started=false;
+        playAlarm();
     }
 
     public String getState(){
@@ -140,5 +146,13 @@ public class PomodoroTimer extends TimerCircle{
         else{
             return "BREAK";
         }
+    }
+    private void playAlarm(){
+        alarmPlayer.playTrack();
+        alarmPlaying=true;
+    }
+    public void stopAlarm(){
+        alarmPlayer.stopAlarm();
+        alarmPlaying=false;
     }
 }

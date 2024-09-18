@@ -19,7 +19,7 @@ public class TimerCircle extends JProgressBar{
         this.started=false;
         this.currTime=0;
         this.setUI(new ProgressCircleUI());
-        this.setBorderPainted(true);
+        this.setBorderPainted(false);
         this.setForeground(new Color(102, 255, 102));//light green
         this.setStringPainted(false);
     }
