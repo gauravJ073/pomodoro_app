@@ -4,24 +4,26 @@ import java.awt.*;
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
-        int focusSeconds=70, breakSeconds=10;
+        int focusSeconds= 1500, breakSeconds= 300;
 
-        PomodoroTimer timer=new PomodoroTimer(focusSeconds, breakSeconds, "src\\audios\\alarms\\classic_alarm.wav");
+        PomodoroTimer timer=new PomodoroTimer(focusSeconds, breakSeconds, ".\\src\\audios\\alarms\\classic_alarm.wav");
 
-        JFrame frame= new JFrame("Slider");
-        Container contentPane=frame.getContentPane();
+        JFrame frame= new JFrame("Pomodoro App");
+        Container contentPane = frame.getContentPane();
+        contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.PAGE_AXIS));
 
-        JPanel panel= new JPanel();
+        PlayerComponent playerPanel = new PlayerComponent();
 
-        panel.add(timer);
+        JPanel timerPanel= new JPanel();
+        timerPanel.add(timer);
 
-        contentPane.add(panel);
+
+        contentPane.add(timerPanel);
+        contentPane.add(playerPanel);
 
         frame.pack();
         frame.setVisible(true);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
         timer.startTimer();
-        System.out.print("Hello and welcome!");
     }
 }
